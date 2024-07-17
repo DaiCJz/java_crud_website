@@ -1,0 +1,196 @@
+/* Reset some default styles */
+body, h1, h2, h3, h4, h5, h6, p, a {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Basic body styling */
+body {
+  background-color: #c5ced0;
+  color: #333333;
+  line-height: 1.6;
+}
+
+/* Container styles */
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* Header styles */
+header {
+  background: #56785b;
+  color: #fff;
+  padding-top: 30px;
+  min-height: 70px;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+header ul {
+  padding: 0;
+  list-style: none;
+}
+
+header li {
+  float: left;
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+
+header #branding {
+  float: left;
+}
+
+header #branding h1 {
+  margin: 0;
+}
+
+header nav {
+  float: right;
+  margin-top: 10px;
+}
+
+/* Main content styles */
+.content-wrapper {
+  padding: 20px;
+}
+
+/* Section container styles */
+.section-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.white-text-container {
+  color: #fff;
+}
+
+.background-color-layer {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* Card styles */
+.card {
+  background: #fff;
+  margin: 20px 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 5px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.card-block {
+  padding: 20px;
+}
+
+.card-block h2 {
+  margin-bottom: 20px;
+}
+
+.card-block h3 {
+  text-align: left; /* Center align the text */
+}
+.education-experience {
+  display: block;
+  width: calc(100% - 30px); /* 設置寬度為父容器的 100% 減去左右的 margin */
+  margin-left: 15px; /* 左邊距 */
+  padding: 20px;
+  border: 1px solid #ddd; /* 邊框 */
+  border-radius: 5px; /* 邊框圓角 */
+  margin-bottom: 20px; /* 底部外邊距 */
+}
+
+.project-image {
+  width: 100px; /* 設定固定寬度 */
+  height: 100px; /* 設定固定高度 */
+  object-fit: cover; /* 確保圖片保持比例 */
+  display: block;
+  margin: 0 auto; /* 確保圖片在容器中置中 */
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Footer styles */
+.footer-container {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.footer-container p {
+  margin: 10px 0;
+}
+
+.fa-icon {
+  margin: 0 10px;
+}
+
+.fa-icon i {
+  font-size: 24px;
+  color: #fff;
+}
+
+.social-buttons a {
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+  color: #333;
+}
+
+.social-round-icon {
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 50%;
+  padding: 10px;
+  background: #333;
+  color: #fff;
+}
+
+.btn-primary {
+  background: #77b300;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #669900;
+}
+
+/* Carousel styles */
+.carousel-inner img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.carousel-indicators li {
+  background: #333;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>註冊表單</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">註冊表單</h1>
+        
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="username">使用者名稱:</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="您的使用者帳號">
+            </div>
+            <div class="form-group">
+                <label for="password">密碼:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="您的密碼">
+                <small id="passwordHelp" class="form-text text-danger">密碼不得小於 8 個字元。</small>
+            </div>
+            <div class="form-group">
+                <label for="location">你來自:</label>
+                <select class="form-control" id="location" name="location">
+                    <option value="taipei">台北</option>
+                    <option value="taichung" selected>台中</option>
+                    <option value="tainan">台南</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gender">性別:</label>
+                <div>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">男</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">女</label>
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">其他</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="hobbies">選擇興趣愛好:</label>
+                <div>
+                    <input type="checkbox" id="sport" name="hobbies" value="sport">
+                    <label for="sport">運動</label>
+                    <input type="checkbox" id="travel" name="hobbies" value="travel">
+                    <label for="travel">旅行</label>
+                    <input type="checkbox" id="reading" name="hobbies" value="reading">
+                    <label for="reading">閱讀</label>
+                    <input type="checkbox" id="music" name="hobbies" value="music">
+                    <label for="music">音樂</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="introduction">自我介紹:</label>
+                <textarea class="form-control" id="introduction" name="introduction" rows="3" cols="30" placeholder="請輸入您的自我介紹"></textarea>
+            </div>
+            <a href="product.html" class="btn btn-primary">提交</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            if (password.length < 8) {
+                alert('密碼長度不得小於 8 個字元');
+                event.preventDefault();
+            } else {
+                localStorage.setItem('username', document.getElementById('username').value);
+                localStorage.setItem('password', password);
+                localStorage.setItem('location', document.getElementById('location').value);
+                localStorage.setItem('gender', document.querySelector('input[name="gender"]:checked').value);
+                var hobbies = [];
+                document.querySelectorAll('input[name="hobbies"]:checked').forEach(function(checkbox) {
+                    hobbies.push(checkbox.value);
+                });
+                localStorage.setItem('hobbies', hobbies.join(', '));
+                localStorage.setItem('introduction', document.getElementById('introduction').value);
+            }
+        });
+    </script>
+</body>
+
+</html>

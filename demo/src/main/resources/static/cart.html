@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>購物車的商品</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 0 10px black;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .subtotal {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+    </style>
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            if (!cart) return;
+
+            document.getElementById('quantity1').textContent = cart.product1;
+            document.getElementById('quantity2').textContent = cart.product2;
+            document.getElementById('quantity3').textContent = cart.product3;
+
+            updateSubtotal();
+        }
+
+        function updateSubtotal() {
+            const prices = [100, 200, 300];
+            const quantities = [
+                parseInt(document.getElementById('quantity1').textContent),
+                parseInt(document.getElementById('quantity2').textContent),
+                parseInt(document.getElementById('quantity3').textContent)
+            ];
+
+            let subtotal = 0;
+            for (let i = 0; i < prices.length; i++) {
+                subtotal += prices[i] * quantities[i];
+            }
+
+            document.getElementById('subtotal').textContent = '總計: NT$ ' + subtotal;
+        }
+
+        function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            if (!cart) return;
+
+            const order = {
+                product1: cart.product1,
+                product2: cart.product2,
+                product3: cart.product3,
+                pickup: document.getElementById('pickup').value,
+                address: document.getElementById('address').value
+            };
+
+            // 發送訂單至後端 (此處示範用 HTTPBin)
+            fetch('https://httpbin.org/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            }).then(response => response.json()).then(data => {
+                console.log('訂單已送出:', data);
+                alert('訂單已送出');
+                localStorage.removeItem('cart');
+                window.location.href = 'success.html';
+            });
+        }
+
+        function handlePickupChange() {
+            const pickup = document.getElementById('pickup').value;
+            if (pickup === 'familymart') {
+                document.getElementById('storeInput').classList.add('visible');
+                document.getElementById('storeInput').classList.remove('hidden');
+                document.getElementById('addressInput').classList.add('hidden');
+                document.getElementById('addressInput').classList.remove('visible');
+            } else {
+                document.getElementById('storeInput').classList.add('hidden');
+                document.getElementById('storeInput').classList.remove('visible');
+                document.getElementById('addressInput').classList.add('visible');
+                document.getElementById('addressInput').classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            document.getElementById('pickup').addEventListener('change', handlePickupChange);
+            handlePickupChange();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>購物車的商品</h1>
+        <h2>已購買商品</h2>
+        <table border="1">
+            <tr>
+                <th>商品圖片</th>
+                <th>商品名稱</th>
+                <th>價格</th>
+                <th>數量</th>
+            </tr>
+            <tr>
+                <td><img src="https://via.placeholder.com/100" alt="商品1"></td>
+                <td>商品1</td>
+                <td>NT$ 100</td>
+                <td id="quantity1"></td>
+            </tr>
+            <tr>
+                <td><img src="https://via.placeholder.com/100" alt="商品2"></td>
+                <td>商品2</td>
+                <td>NT$ 200</td>
+                <td id="quantity2"></td>
+            </tr>
+            <tr>
+                <td><img src="https://via.placeholder.com/100" alt="商品3"></td>
+                <td>商品3</td>
+                <td>NT$ 300</td>
+                <td id="quantity3"></td>
+            </tr>
+        </table>
+        <div class="subtotal" id="subtotal">總計: NT$ 0</div>
+
+        <h2>取貨方式</h2>
+        <p>
+            <select id="pickup" name="pickup">
+                <option value="familymart">全家</option>
+                <option value="other">宅急便</option>
+            </select>
+        </p>
+
+        <div id="storeInput" class="hidden">
+            <h2>輸入店家：</h2>
+            <p>
+                <input type="text" id="store" name="store" placeholder="請輸入店家名稱">
+            </p>
+        </div>
+
+        <div id="addressInput" class="hidden">
+            <h2>宅急便：</h2>
+            <p>
+                <label for="address">輸入地址：</label>
+                <p>
+                    <input type="text" id="address" name="address" placeholder="請輸入地址">
+                </p>
+            </p>
+        </div>
+
+        <button type="button" onclick="checkout()">結帳</button>
+    </div>
+</body>
+</html>

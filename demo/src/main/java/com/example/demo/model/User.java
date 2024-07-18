@@ -7,23 +7,19 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String username;
     private String password;
+    private String location;
+    private String gender;
+    private String hobbies;
+    private String introduction;
 
-    public User() {
-    }
+    // Getter and Setter methods (omitted for brevity)
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    // getters and setters
     public Long getId() {
         return id;
     }
@@ -48,12 +44,35 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }

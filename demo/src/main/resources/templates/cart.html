@@ -4,30 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購物車的商品</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* 全局樣式 */
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
         }
-        /* Container styles */
+
         .container {
             width: 80%;
-            margin: 0 auto; /* 將 container 置中 */
-            overflow: hidden;
-            padding: 20px;
-        }
-
-        .main-container {
-            width: 100%; /* 調整為100%以自適應視窗大小 */
-            max-width: 1200px; /* 添加最大寬度以避免過寬的情況 */
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ccc;
+        }
+
+        header {
+            background: #56785b;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        header nav ul {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav ul li {
+            display: inline;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1em;
+        }
+
+        .main-container {
+            padding: 20px;
         }
 
         table {
@@ -39,85 +67,52 @@
         table, th, td {
             border: 1px solid #ccc;
             padding: 10px;
+            text-align: center;
         }
 
         th {
             background-color: #f2f2f2;
         }
 
-        button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 1em;
+        .subtotal {
+            margin: 20px 0;
+            font-size: 1.2em;
+            text-align: right;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 1.2em;
             color: #fff;
-            background-color: #007bff;
+            background-color: #77b300;
             border: none;
             border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .subtotal {
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
-
-        /* Header styles */
-        header {
-            background: #56785b;
-            color: #fff;
-            padding-top: 15px; /* 減少上邊距 */
-            min-height: 30px; /* 減少高度 */
-        }
-        header h1 {
-            margin-bottom: 20px;
-        }
-        header a {
-            color: #fff;
+            text-align: center;
             text-decoration: none;
-            text-transform: uppercase;
-            font-size: 20px;
         }
 
-        header ul {
-            padding: 0;
-            list-style: none;
+        .checkout-button:hover {
+            background-color: #669900;
         }
 
-        header li {
-            display: inline;
-            padding: 0 10px;
-        }
-
-        header #branding {
-            float: left;
-        }
-
-        header #branding h1 {
-            margin: 0;
-        }
-
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        /* 頁尾樣式 */
         .footer-container {
             background: #333;
             color: #fff;
             text-align: center;
             padding: 15px 0;
-            clear: both; /* 清除浮動 */
+            clear: both;
         }
 
         .footer-container p {
             margin: 10px 0;
         }
 
-        /* 隱藏和顯示元素 */
+        .centered {
+            text-align: center;
+        }
+
         .hidden {
             display: none;
         }
@@ -126,127 +121,71 @@
             display: block;
         }
     </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Product</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">首頁</a></li>
-                    <li><a href="/product">商品</a></li>
-                    <li><a href="/cart">購物車</a></li>
-                    <li><a href="/login">登入</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <div class="main-container">
-        <h1>購物車的商品</h1>
-        <h2>已購買商品</h2>
-        <table border="1">
-            <tr>
-                <th>商品圖片</th>
-                <th>商品名稱</th>
-                <th>價格</th>
-                <th>數量</th>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="商品1"></td>
-                <td>商品1</td>
-                <td>NT$ 100</td>
-                <td id="quantity1"></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="商品2"></td>
-                <td>商品2</td>
-                <td>NT$ 200</td>
-                <td id="quantity2"></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="商品3"></td>
-                <td>商品3</td>
-                <td>NT$ 300</td>
-                <td id="quantity3"></td>
-            </tr>
-        </table>
-        <div class="subtotal" id="subtotal">總計: NT$ 0</div>
-
-        <h2>取貨方式</h2>
-        <p>
-            <select id="pickup" name="pickup" onchange="handlePickupChange()">
-                <option value="familymart">全家</option>
-                <option value="other">宅急便</option>
-            </select>
-        </p>
-
-        <div id="storeInput" class="hidden">
-            <h2>輸入店家：</h2>
-            <p>
-                <input type="text" id="store" name="store" placeholder="請輸入店家名稱">
-            </p>
-        </div>
-
-        <div id="addressInput" class="hidden">
-            <h2>宅急便：</h2>
-            <p>
-                <label for="address">輸入地址：</label>
-                <input type="text" id="address" name="address" placeholder="請輸入地址">
-            </p>
-        </div>
-
-        <button type="button" onclick="checkout()">結帳</button>
-    </div>
-
-    <div class="footer-container">
-        <div class="footer-container">
-            <p>&copy; Jack DAI. All Rights Reserved.</p>
-        </div>
-    </div>
-
     <script>
         function loadCart() {
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            if (!cart) return;
-
-            document.getElementById('quantity1').textContent = cart.product1;
-            document.getElementById('quantity2').textContent = cart.product2;
-            document.getElementById('quantity3').textContent = cart.product3;
-
+            const cart = JSON.parse(localStorage.getItem('cart')) || { product1: 0, product2: 0, product3: 0 };
+    
+            document.getElementById('product1-quantity').textContent = cart.product1;
+            document.getElementById('product2-quantity').textContent = cart.product2;
+            document.getElementById('product3-quantity').textContent = cart.product3;
+    
             updateSubtotal();
         }
-
+    
         function updateSubtotal() {
             const prices = [100, 200, 300];
             const quantities = [
-                parseInt(document.getElementById('quantity1').textContent),
-                parseInt(document.getElementById('quantity2').textContent),
-                parseInt(document.getElementById('quantity3').textContent)
+                parseInt(document.getElementById('product1-quantity').textContent),
+                parseInt(document.getElementById('product2-quantity').textContent),
+                parseInt(document.getElementById('product3-quantity').textContent)
             ];
-
+    
             let subtotal = 0;
             for (let i = 0; i < prices.length; i++) {
                 subtotal += prices[i] * quantities[i];
+                document.getElementById(`product${i + 1}-subtotal`).textContent = 'NT$ ' + (prices[i] * quantities[i]);
             }
-
+    
             document.getElementById('subtotal').textContent = '總計: NT$ ' + subtotal;
         }
-
+    
         function checkout() {
             const cart = JSON.parse(localStorage.getItem('cart'));
             if (!cart) return;
-        
+    
+            const pickup = document.getElementById('pickup').value;
+            const address = document.getElementById('address').value;
+            const store = document.getElementById('store').value;
+            const subtotal = document.getElementById('subtotal').textContent;
+    
+            // 檢查取貨方式和輸入欄位
+            if (pickup === 'select') {
+                alert('請選擇取貨方式');
+                return;
+            }
+            if (pickup === 'address' && address === '') {
+                alert('請輸入地址');
+                return;
+            }
+            if (pickup === 'familymart' && store === '') {
+                alert('請輸入店家');
+                return;
+            }
+    
+            // 檢查總計是否為0
+            if (subtotal === '總計: NT$ 0') {
+                alert('購物車總計為0，無法結帳');
+                return;
+            }
+    
             const order = {
                 product1: cart.product1,
                 product2: cart.product2,
                 product3: cart.product3,
-                pickup: document.getElementById('pickup').value,
-                address: document.getElementById('address').value || document.getElementById('store').value
+                pickup: pickup,
+                address: address || store
             };
-        
+    
             // 發送訂單至後端
             fetch('/api/orders', {
                 method: 'POST',
@@ -269,7 +208,7 @@
                 alert('訂單送出失敗，請稍後再試');
             });
         }
-
+    
         function handlePickupChange() {
             const pickup = document.getElementById('pickup').value;
             if (pickup === 'familymart') {
@@ -277,17 +216,101 @@
                 document.getElementById('storeInput').classList.remove('hidden');
                 document.getElementById('addressInput').classList.add('hidden');
                 document.getElementById('addressInput').classList.remove('visible');
-            } else {
+            } else if (pickup === 'address') {
                 document.getElementById('storeInput').classList.add('hidden');
                 document.getElementById('storeInput').classList.remove('visible');
                 document.getElementById('addressInput').classList.add('visible');
                 document.getElementById('addressInput').classList.remove('hidden');
             }
         }
-
+    
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
+            document.getElementById('pickup').addEventListener('change', handlePickupChange);
         });
     </script>
+    
+</head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="/">首頁</a></li>
+                <li><a href="/product">商品</a></li>
+                <li><a href="/cart">購物車</a></li>
+                <li><a href="/login">登入</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="main-container">
+            <h1 class="centered">購物車的商品</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>商品圖片</th>
+                        <th>商品</th>
+                        <th>數量</th>
+                        <th>價格</th>
+                        <th>小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="https://via.placeholder.com/100" alt="商品1"></td>
+                        <td>商品1</td>
+                        <td id="product1-quantity">0</td>
+                        <td>NT$ 100</td>
+                        <td id="product1-subtotal">NT$ 0</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://via.placeholder.com/100" alt="商品2"></td>
+                        <td>商品2</td>
+                        <td id="product2-quantity">0</td>
+                        <td>NT$ 200</td>
+                        <td id="product2-subtotal">NT$ 0</td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://via.placeholder.com/100" alt="商品3"></td>
+                        <td>商品3</td>
+                        <td id="product3-quantity">0</td>
+                        <td>NT$ 300</td>
+                        <td id="product3-subtotal">NT$ 0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtotal" id="subtotal">小計: NT$ 0</div>
+            <h2 class="centered">取貨方式</h2>
+            <p class="centered">
+                <select id="pickup" name="pickup" onchange="handlePickupChange()">
+                    <option value="select">---請選擇---</option>
+                    <option value="familymart">全家</option>
+                    <option value="address">宅急便</option>
+                </select>
+            </p>
+
+            <div id="storeInput" class="hidden centered">
+                <h2>輸入店家：</h2>
+                <p>
+                    <input type="text" id="store" name="store" placeholder="請輸入店家名稱">
+                </p>
+            </div>
+
+            <div id="addressInput" class="hidden centered">
+                <h2>宅急便：</h2>
+                <p>
+                    <label for="address">輸入地址：</label>
+                    <input type="text" id="address" name="address" placeholder="請輸入地址">
+                </p>
+            </div>
+            <button class="checkout-button" onclick="checkout()">前往結帳</button>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <p>&copy; Jack DAI. All Rights Reserved.</p>
+    </div>
 </body>
 </html>

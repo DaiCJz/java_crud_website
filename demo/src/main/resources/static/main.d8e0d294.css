@@ -7,7 +7,6 @@ body, h1, h2, h3, h4, h5, h6, p, a {
 
 /* Basic body styling */
 body {
-  background-color: #c5ced0;
   color: #333333;
   line-height: 1.6;
 }
@@ -21,9 +20,8 @@ body {
 
 /* Header styles */
 header {
-  background: #56785b;
   color: #fff;
-  padding-top: 30px;
+  padding-top: 50px;
   min-height: 70px;
 }
 
@@ -58,6 +56,14 @@ header nav {
   margin-top: 10px;
 }
 
+header h1{
+  font-size: 60px;
+}
+
+.gradient-background {
+  background: linear-gradient(#9fd4df, #348f50);
+}
+
 /* Main content styles */
 .content-wrapper {
   padding: 20px;
@@ -65,13 +71,14 @@ header nav {
 
 /* Section container styles */
 .section-container {
-  padding: 20px;
+  padding: 40px;
   text-align: center;
 }
 
 .white-text-container {
   color: #fff;
 }
+
 
 .background-color-layer {
   position: relative;

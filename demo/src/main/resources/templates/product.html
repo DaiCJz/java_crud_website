@@ -5,70 +5,58 @@
     <title>商品頁面</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>        
-        /* Basic body styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
         }
-        
-        /* Container styles */
+
         .container {
             width: 80%;
-            margin: 0 auto; /* Center the container */
-            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Header styles */
+
         header {
             background: #56785b;
             color: #fff;
-            padding-top: 15px; /* Reduce top padding */
-            min-height: 30px; /* Minimum height */
-        }
-        header h1 {
-            margin-bottom: 20px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header a {
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        header nav ul {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav ul li {
+            display: inline;
+        }
+
+        header nav ul li a {
             color: #fff;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 20px;
+            font-size: 1em;
         }
-        
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        
-        header li {
-            display: inline;
-            padding: 0 10px;
-        }
-        
-        header #branding {
-            float: left;
-        }
-        
-        header #branding h1 {
-            margin: 0;
-        }
-        
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        
-        /* Main content styles */
+
         .content-wrapper {
-            margin: 0 auto; /* Center the content */
             text-align: center;
         }
-        
-        /* Product styles */
+
         .product {
             display: inline-block;
             width: 200px;
@@ -78,38 +66,54 @@
             border-radius: 4px;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
         }
-        
+
         .product img {
             width: 100px;
             height: 100px;
             margin-bottom: 10px;
         }
-        
+
         .product h2 {
-            font-size: 2em;
+            font-size: 1.5em;
             margin: 10px 0;
         }
-        
+
         .product p {
             font-size: 1.2em;
             color: #007bff;
             margin: 10px 0;
         }
-        
-        label {
+
+        .product label {
             display: block;
             margin-bottom: 5px;
         }
-        
-        select {
+
+        .product select {
             padding: 5px;
             border-radius: 4px;
             border: 1px solid #ccc;
             background-color: #fff;
         }
-        
+
+        .subtotal {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .footer-container {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            clear: both;
+        }
+
+        .footer-container p {
+            margin: 10px 0;
+        }
+
         button {
             padding: 10px 20px;
             margin-top: 20px;
@@ -120,30 +124,11 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
+
         button:hover {
             background-color: #669900;
         }
-        
-        .subtotal {
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-        
-        /* Footer styles */
-        .footer-container {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-        }
-        
-        .footer-container p {
-            margin: 10px 0;
-        }
-        
-        
-        /* Hidden and visible elements */
+
         .hidden {
             display: none;
         }
@@ -152,50 +137,54 @@
         function updateSubtotal() {
             const prices = [100, 200, 300];
             const quantities = [
-                parseInt(document.getElementById('quantity1').value),
-                parseInt(document.getElementById('quantity2').value),
-                parseInt(document.getElementById('quantity3').value)
+                parseInt(document.getElementById('quantity1').value) || 0,
+                parseInt(document.getElementById('quantity2').value) || 0,
+                parseInt(document.getElementById('quantity3').value) || 0
             ];
-
+    
             let subtotal = 0;
             for (let i = 0; i < prices.length; i++) {
                 subtotal += prices[i] * quantities[i];
             }
-
+    
             document.getElementById('subtotal').textContent = '小計: NT$ ' + subtotal;
         }
-
+    
         function saveToLocalStorage() {
             const quantities = {
                 product1: document.getElementById('quantity1').value,
                 product2: document.getElementById('quantity2').value,
                 product3: document.getElementById('quantity3').value
             };
-
+            const subtotalText = document.getElementById('subtotal').textContent;
+            const subtotal = parseInt(subtotalText.replace('小計: NT$ ', ''));
+    
+            if (subtotal === 0) {
+                alert('購物車總計為0，無法結帳');
+                return;
+            }
+    
             localStorage.setItem('cart', JSON.stringify(quantities));
             window.location.href = '/cart';
         }
-
+    
         document.addEventListener('DOMContentLoaded', (event) => {
             updateSubtotal();
         });
     </script>
+    
 </head>
 <body>
     <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Product</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">首頁</a></li>
-                    <li><a href="/product">商品</a></li>
-                    <li><a href="/cart">購物車</a></li>
-                    <li><a href="/login">登入</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>Product</h1>
+        <nav>
+            <ul>
+                <li><a href="/">首頁</a></li>
+                <li><a href="/product">商品</a></li>
+                <li><a href="/cart">購物車</a></li>
+                <li><a href="/login">登入</a></li>
+            </ul>
+        </nav>
     </header>
 
     <div class="container">
@@ -206,7 +195,7 @@
                 <h2>商品1</h2>
                 <p>NT$ 100</p>
                 <label for="quantity1">數量</label>
-                <select id="quantity1" name="quantity1">
+                <select id="quantity1" name="quantity1" onchange="updateSubtotal()">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -218,7 +207,7 @@
                 <h2>商品2</h2>
                 <p>NT$ 200</p>
                 <label for="quantity2">數量</label>
-                <select id="quantity2" name="quantity2">
+                <select id="quantity2" name="quantity2" onchange="updateSubtotal()">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -230,7 +219,7 @@
                 <h2>商品3</h2>
                 <p>NT$ 300</p>
                 <label for="quantity3">數量</label>
-                <select id="quantity3" name="quantity3">
+                <select id="quantity3" name="quantity3" onchange="updateSubtotal()">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -243,10 +232,7 @@
     </div>
 
     <div class="footer-container">
-        <div class="footer-container">
-            <p>&copy; Jack DAI. All Rights Reserved.</p>
-        </div>
+        <p>&copy; Jack DAI. All Rights Reserved.</p>
     </div>
-
 </body>
 </html>

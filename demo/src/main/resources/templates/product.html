@@ -1,252 +1,260 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>商品頁面</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>        
-        /* Basic body styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Container styles */
-        .container {
-            width: 80%;
-            margin: 0 auto; /* Center the container */
-            overflow: hidden;
-            padding: 20px;
-        }
-        
-        /* Header styles */
-        header {
-            background: #56785b;
-            color: #fff;
-            padding-top: 15px; /* Reduce top padding */
-            min-height: 30px; /* Minimum height */
-        }
-        header h1 {
-            margin-bottom: 20px;
-        }
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Basic body styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
 
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 20px;
-        }
-        
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        
-        header li {
-            display: inline;
-            padding: 0 10px;
-        }
-        
-        header #branding {
-            float: left;
-        }
-        
-        header #branding h1 {
-            margin: 0;
-        }
-        
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        
-        /* Main content styles */
-        .content-wrapper {
-            margin: 0 auto; /* Center the content */
-            text-align: center;
-        }
-        
-        /* Product styles */
-        .product {
-            display: inline-block;
-            width: 200px;
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .product img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-        
-        .product h2 {
-            font-size: 2em;
-            margin: 10px 0;
-        }
-        
-        .product p {
-            font-size: 1.2em;
-            color: #007bff;
-            margin: 10px 0;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        select {
-            padding: 5px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-        }
-        
-        button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #77b300;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        button:hover {
-            background-color: #669900;
-        }
-        
-        .subtotal {
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-        
-        /* Footer styles */
-        .footer-container {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-        }
-        
-        .footer-container p {
-            margin: 10px 0;
-        }
-        
-        
-        /* Hidden and visible elements */
-        .hidden {
-            display: none;
-        }
+      /* Container styles */
+      .container {
+        width: 80%;
+        margin: 0 auto; /* Center the container */
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      /* Header styles */
+      header {
+        background: #56785b;
+        color: #fff;
+        padding-top: 15px; /* Reduce top padding */
+        min-height: 30px; /* Minimum height */
+      }
+      header h1 {
+        margin-bottom: 20px;
+      }
+
+      header a {
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+
+      header ul {
+        padding: 0;
+        list-style: none;
+      }
+
+      header li {
+        display: inline;
+        padding: 0 10px;
+      }
+
+      header #branding {
+        float: left;
+      }
+
+      header #branding h1 {
+        margin: 0;
+      }
+
+      header nav {
+        float: right;
+        margin-top: 10px;
+      }
+
+      /* Main content styles */
+      .content-wrapper {
+        margin: 0 auto; /* Center the content */
+        text-align: center;
+      }
+
+      /* Product styles */
+      .product {
+        display: inline-block;
+        width: 200px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .product img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+      }
+
+      .product h2 {
+        font-size: 2em;
+        margin: 10px 0;
+      }
+
+      .product p {
+        font-size: 1.2em;
+        color: #007bff;
+        margin: 10px 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      select {
+        padding: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-top: 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #77b300;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #669900;
+      }
+
+      .subtotal {
+        margin-top: 20px;
+        font-size: 1.2em;
+      }
+
+      /* Footer styles */
+      .footer-container {
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 0;
+      }
+
+      .footer-container p {
+        margin: 10px 0;
+      }
+
+      /* Hidden and visible elements */
+      .hidden {
+        display: none;
+      }
     </style>
     <script>
-        function updateSubtotal() {
-            const prices = [100, 200, 300];
-            const quantities = [
-                parseInt(document.getElementById('quantity1').value),
-                parseInt(document.getElementById('quantity2').value),
-                parseInt(document.getElementById('quantity3').value)
-            ];
+      function updateSubtotal() {
+        const prices = [100, 200, 300];
+        const quantities = [
+          parseInt(document.getElementById("quantity1").value) || 0,
+          parseInt(document.getElementById("quantity2").value) || 0,
+          parseInt(document.getElementById("quantity3").value) || 0,
+        ];
 
-            let subtotal = 0;
-            for (let i = 0; i < prices.length; i++) {
-                subtotal += prices[i] * quantities[i];
-            }
-
-            document.getElementById('subtotal').textContent = '小計: NT$ ' + subtotal;
+        let subtotal = 0;
+        for (let i = 0; i < prices.length; i++) {
+          subtotal += prices[i] * quantities[i];
         }
 
-        function saveToLocalStorage() {
-            const quantities = {
-                product1: document.getElementById('quantity1').value,
-                product2: document.getElementById('quantity2').value,
-                product3: document.getElementById('quantity3').value
-            };
+        document.getElementById("subtotal").textContent =
+          "小計: NT$ " + subtotal;
+      }
 
-            localStorage.setItem('cart', JSON.stringify(quantities));
-            window.location.href = '/cart';
-        }
+      function saveToLocalStorage() {
+        const quantities = {
+          product1: document.getElementById("quantity1").value,
+          product2: document.getElementById("quantity2").value,
+          product3: document.getElementById("quantity3").value,
+        };
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            updateSubtotal();
+        localStorage.setItem("cart", JSON.stringify(quantities));
+        window.location.href = "/cart";
+      }
+
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const quantitySelectors = document.querySelectorAll(
+          'select[id^="quantity"]'
+        );
+        quantitySelectors.forEach((select) => {
+          select.addEventListener("change", updateSubtotal);
         });
+        updateSubtotal();
+      });
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Product</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">首頁</a></li>
-                    <li><a href="/product">商品</a></li>
-                    <li><a href="/cart">購物車</a></li>
-                    <li><a href="/login">登入</a></li>
-                </ul>
-            </nav>
+      <div class="container">
+        <div id="branding">
+          <h1>Product</h1>
         </div>
+        <nav>
+          <ul>
+            <li><a href="/">首頁</a></li>
+            <li><a href="/product">商品</a></li>
+            <li><a href="/cart">購物車</a></li>
+            <li><a href="/login">登入</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <div class="container">
-        <div class="content-wrapper">
-            <h1>商品頁面</h1>
-            <div class="product">
-                <img src="https://via.placeholder.com/100" alt="商品1" />
-                <h2>商品1</h2>
-                <p>NT$ 100</p>
-                <label for="quantity1">數量</label>
-                <select id="quantity1" name="quantity1">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/100" alt="商品2" />
-                <h2>商品2</h2>
-                <p>NT$ 200</p>
-                <label for="quantity2">數量</label>
-                <select id="quantity2" name="quantity2">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/100" alt="商品3" />
-                <h2>商品3</h2>
-                <p>NT$ 300</p>
-                <label for="quantity3">數量</label>
-                <select id="quantity3" name="quantity3">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div>
-            <div class="subtotal" id="subtotal">小計: NT$ 0</div>
-            <button type="button" onclick="saveToLocalStorage()">結帳</button>
+      <div class="content-wrapper">
+        <h1>商品頁面</h1>
+        <div class="product">
+          <img src="https://via.placeholder.com/100" alt="商品1" />
+          <h2>商品1</h2>
+          <p>NT$ 100</p>
+          <label for="quantity1">數量</label>
+          <select id="quantity1" name="quantity1">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
         </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/100" alt="商品2" />
+          <h2>商品2</h2>
+          <p>NT$ 200</p>
+          <label for="quantity2">數量</label>
+          <select id="quantity2" name="quantity2">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/100" alt="商品3" />
+          <h2>商品3</h2>
+          <p>NT$ 300</p>
+          <label for="quantity3">數量</label>
+          <select id="quantity3" name="quantity3">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="subtotal" id="subtotal">小計: NT$ 0</div>
+        <button type="button" onclick="saveToLocalStorage()">結帳</button>
+      </div>
     </div>
 
     <div class="footer-container">
-        <div class="footer-container">
-            <p>&copy; Jack DAI. All Rights Reserved.</p>
-        </div>
+      <div class="footer-container">
+        <p>&copy; Jack DAI. All Rights Reserved.</p>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>

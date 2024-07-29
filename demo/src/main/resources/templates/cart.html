@@ -1,293 +1,338 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>購物車的商品</title>
     <style>
-        /* 全局樣式 */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        /* Container styles */
-        .container {
-            width: 80%;
-            margin: 0 auto; /* 將 container 置中 */
-            overflow: hidden;
-            padding: 20px;
-        }
+      /* 全局樣式 */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      /* Container styles */
+      .container {
+        width: 80%;
+        margin: 0 auto; /* 將 container 置中 */
+        overflow: hidden;
+        padding: 20px;
+      }
 
-        .main-container {
-            width: 100%; /* 調整為100%以自適應視窗大小 */
-            max-width: 1200px; /* 添加最大寬度以避免過寬的情況 */
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ccc;
-        }
+      .main-container {
+        width: 100%; /* 調整為100%以自適應視窗大小 */
+        max-width: 1200px; /* 添加最大寬度以避免過寬的情況 */
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+      }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
 
-        table, th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
 
-        th {
-            background-color: #f2f2f2;
-        }
+      th {
+        background-color: #f2f2f2;
+      }
 
-        button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+      button {
+        padding: 10px 20px;
+        margin-top: 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+      button:hover {
+        background-color: #0056b3;
+      }
 
-        .subtotal {
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
+      .subtotal {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
 
-        /* Header styles */
-        header {
-            background: #56785b;
-            color: #fff;
-            padding-top: 15px; /* 減少上邊距 */
-            min-height: 30px; /* 減少高度 */
-        }
-        header h1 {
-            margin-bottom: 20px;
-        }
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 20px;
-        }
+      /* Header styles */
+      header {
+        background: #56785b;
+        color: #fff;
+        padding-top: 15px; /* 減少上邊距 */
+        min-height: 30px; /* 減少高度 */
+      }
+      header h1 {
+        margin-bottom: 20px;
+      }
+      header a {
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
 
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
+      header ul {
+        padding: 0;
+        list-style: none;
+      }
 
-        header li {
-            display: inline;
-            padding: 0 10px;
-        }
+      header li {
+        display: inline;
+        padding: 0 10px;
+      }
 
-        header #branding {
-            float: left;
-        }
+      header #branding {
+        float: left;
+      }
 
-        header #branding h1 {
-            margin: 0;
-        }
+      header #branding h1 {
+        margin: 0;
+      }
 
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        /* 頁尾樣式 */
-        .footer-container {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-            clear: both; /* 清除浮動 */
-        }
+      header nav {
+        float: right;
+        margin-top: 10px;
+      }
+      /* 頁尾樣式 */
+      .footer-container {
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 0;
+        clear: both; /* 清除浮動 */
+      }
 
-        .footer-container p {
-            margin: 10px 0;
-        }
+      .footer-container p {
+        margin: 10px 0;
+      }
 
-        /* 隱藏和顯示元素 */
-        .hidden {
-            display: none;
-        }
+      /* 隱藏和顯示元素 */
+      .hidden {
+        display: none;
+      }
 
-        .visible {
-            display: block;
-        }
+      .visible {
+        display: block;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Product</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">首頁</a></li>
-                    <li><a href="/product">商品</a></li>
-                    <li><a href="/cart">購物車</a></li>
-                    <li><a href="/login">登入</a></li>
-                </ul>
-            </nav>
+      <div class="container">
+        <div id="branding">
+          <h1>Product</h1>
         </div>
+        <nav>
+          <ul>
+            <li><a href="/">首頁</a></li>
+            <li><a href="/product">商品</a></li>
+            <li><a href="/cart">購物車</a></li>
+            <li><a href="/login">登入</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <div class="main-container">
-        <h1>購物車的商品</h1>
-        <h2>已購買商品</h2>
-        <table border="1">
-            <tr>
-                <th>商品圖片</th>
-                <th>商品名稱</th>
-                <th>價格</th>
-                <th>數量</th>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="商品1"></td>
-                <td>商品1</td>
-                <td>NT$ 100</td>
-                <td id="quantity1"></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="商品2"></td>
-                <td>商品2</td>
-                <td>NT$ 200</td>
-                <td id="quantity2"></td>
-            </tr>
-            <tr>
-                <td><img src="https://via.placeholder.com/100" alt="商品3"></td>
-                <td>商品3</td>
-                <td>NT$ 300</td>
-                <td id="quantity3"></td>
-            </tr>
-        </table>
-        <div class="subtotal" id="subtotal">總計: NT$ 0</div>
+      <h1>購物車的商品</h1>
+      <h2>已購買商品</h2>
+      <table border="1">
+        <tr>
+          <th>商品圖片</th>
+          <th>商品名稱</th>
+          <th>價格</th>
+          <th>數量</th>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/100" alt="商品1" /></td>
+          <td>商品1</td>
+          <td>NT$ 100</td>
+          <td id="quantity1"></td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/100" alt="商品2" /></td>
+          <td>商品2</td>
+          <td>NT$ 200</td>
+          <td id="quantity2"></td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/100" alt="商品3" /></td>
+          <td>商品3</td>
+          <td>NT$ 300</td>
+          <td id="quantity3"></td>
+        </tr>
+      </table>
+      <div class="subtotal" id="subtotal">總計: NT$ 0</div>
 
-        <h2>取貨方式</h2>
+      <h2>取貨方式</h2>
+      <p>
+        <select id="pickup" name="pickup" onchange="handlePickupChange()">
+          <option value="familymart">全家</option>
+          <option value="other">宅急便</option>
+        </select>
+      </p>
+
+      <div id="storeInput" class="hidden">
+        <h2>輸入店家：</h2>
         <p>
-            <select id="pickup" name="pickup" onchange="handlePickupChange()">
-                <option value="familymart">全家</option>
-                <option value="other">宅急便</option>
-            </select>
+          <input
+            type="text"
+            id="store"
+            name="store"
+            placeholder="請輸入店家名稱"
+          />
         </p>
+      </div>
 
-        <div id="storeInput" class="hidden">
-            <h2>輸入店家：</h2>
-            <p>
-                <input type="text" id="store" name="store" placeholder="請輸入店家名稱">
-            </p>
-        </div>
+      <div id="addressInput" class="hidden">
+        <h2>宅急便：</h2>
+        <p>
+          <label for="address">輸入地址：</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="請輸入地址"
+          />
+        </p>
+      </div>
 
-        <div id="addressInput" class="hidden">
-            <h2>宅急便：</h2>
-            <p>
-                <label for="address">輸入地址：</label>
-                <input type="text" id="address" name="address" placeholder="請輸入地址">
-            </p>
-        </div>
-
-        <button type="button" onclick="checkout()">結帳</button>
+      <!-- 結帳表單開始 -->
+      <form method="get" action="payment" onsubmit="setOrderDetails()">
+        <input type="hidden" id="tno" name="tno" />
+        <input type="hidden" id="total" name="total" />
+        <button type="submit">結帳</button>
+      </form>
+      <!-- 結帳表單結束 -->
     </div>
 
     <div class="footer-container">
-        <div class="footer-container">
-            <p>&copy; Jack DAI. All Rights Reserved.</p>
-        </div>
+      <div class="footer-container">
+        <p>&copy; Jack DAI. All Rights Reserved.</p>
+      </div>
     </div>
 
     <script>
-        function loadCart() {
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            if (!cart) return;
+      function setOrderDetails() {
+        const subtotal = document
+          .getElementById("subtotal")
+          .textContent.replace("總計: NT$ ", "");
+        const now = new Date();
+        const tno = `${now.getFullYear()}${(now.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}${now.getDate().toString().padStart(2, "0")}${now
+          .getHours()
+          .toString()
+          .padStart(2, "0")}${now.getMinutes().toString().padStart(2, "0")}${now
+          .getSeconds()
+          .toString()
+          .padStart(2, "0")}${subtotal}`;
+        document.getElementById("tno").value = tno;
+        document.getElementById("total").value = subtotal;
+      }
 
-            document.getElementById('quantity1').textContent = cart.product1;
-            document.getElementById('quantity2').textContent = cart.product2;
-            document.getElementById('quantity3').textContent = cart.product3;
+      function loadCart() {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        if (!cart) return;
 
-            updateSubtotal();
+        document.getElementById("quantity1").textContent = cart.product1;
+        document.getElementById("quantity2").textContent = cart.product2;
+        document.getElementById("quantity3").textContent = cart.product3;
+
+        updateSubtotal();
+      }
+
+      function updateSubtotal() {
+        const prices = [100, 200, 300];
+        const quantities = [
+          parseInt(document.getElementById("quantity1").textContent),
+          parseInt(document.getElementById("quantity2").textContent),
+          parseInt(document.getElementById("quantity3").textContent),
+        ];
+
+        let subtotal = 0;
+        for (let i = 0; i < prices.length; i++) {
+          subtotal += prices[i] * quantities[i];
         }
 
-        function updateSubtotal() {
-            const prices = [100, 200, 300];
-            const quantities = [
-                parseInt(document.getElementById('quantity1').textContent),
-                parseInt(document.getElementById('quantity2').textContent),
-                parseInt(document.getElementById('quantity3').textContent)
-            ];
+        document.getElementById("subtotal").textContent =
+          "總計: NT$ " + subtotal;
+      }
 
-            let subtotal = 0;
-            for (let i = 0; i < prices.length; i++) {
-                subtotal += prices[i] * quantities[i];
+      function checkout() {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        if (!cart) return;
+
+        const order = {
+          product1: cart.product1,
+          product2: cart.product2,
+          product3: cart.product3,
+          pickup: document.getElementById("pickup").value,
+          address:
+            document.getElementById("address").value ||
+            document.getElementById("store").value,
+        };
+
+        // 發送訂單至後端
+        fetch("/api/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(order),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
             }
+            throw new Error("Network response was not ok.");
+          })
+          .then((data) => {
+            console.log("訂單已送出:", data);
+            alert("訂單已送出");
+            localStorage.removeItem("cart");
+            window.location.href = "/product";
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+            alert("訂單送出失敗，請稍後再試");
+          });
+      }
 
-            document.getElementById('subtotal').textContent = '總計: NT$ ' + subtotal;
+      function handlePickupChange() {
+        const pickup = document.getElementById("pickup").value;
+        if (pickup === "familymart") {
+          document.getElementById("storeInput").classList.add("visible");
+          document.getElementById("storeInput").classList.remove("hidden");
+          document.getElementById("addressInput").classList.add("hidden");
+          document.getElementById("addressInput").classList.remove("visible");
+        } else {
+          document.getElementById("storeInput").classList.add("hidden");
+          document.getElementById("storeInput").classList.remove("visible");
+          document.getElementById("addressInput").classList.add("visible");
+          document.getElementById("addressInput").classList.remove("hidden");
         }
+      }
 
-        function checkout() {
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            if (!cart) return;
-        
-            const order = {
-                product1: cart.product1,
-                product2: cart.product2,
-                product3: cart.product3,
-                pickup: document.getElementById('pickup').value,
-                address: document.getElementById('address').value || document.getElementById('store').value
-            };
-        
-            // 發送訂單至後端
-            fetch('/api/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(order)
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Network response was not ok.');
-            }).then(data => {
-                console.log('訂單已送出:', data);
-                alert('訂單已送出');
-                localStorage.removeItem('cart');
-                window.location.href = '/product';
-            }).catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                alert('訂單送出失敗，請稍後再試');
-            });
-        }
-
-        function handlePickupChange() {
-            const pickup = document.getElementById('pickup').value;
-            if (pickup === 'familymart') {
-                document.getElementById('storeInput').classList.add('visible');
-                document.getElementById('storeInput').classList.remove('hidden');
-                document.getElementById('addressInput').classList.add('hidden');
-                document.getElementById('addressInput').classList.remove('visible');
-            } else {
-                document.getElementById('storeInput').classList.add('hidden');
-                document.getElementById('storeInput').classList.remove('visible');
-                document.getElementById('addressInput').classList.add('visible');
-                document.getElementById('addressInput').classList.remove('hidden');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadCart();
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        loadCart();
+      });
     </script>
-</body>
+  </body>
 </html>

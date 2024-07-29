@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>交易結果回傳</title>
+  </head>
+  <body>
+    <h3>交易結果回傳</h3>
+    <ul>
+      <!-- 遍歷所有參數並顯示 -->
+      <th:block th:each="entry : ${params}">
+        <li th:text="${entry.key} + ': ' + ${entry.value}"></li>
+      </th:block>
+    </ul>
+  </body>
+</html>

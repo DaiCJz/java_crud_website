@@ -49,7 +49,7 @@
           })
           .then((username) => {
             console.log("Fetched username:", username); // 用於調試
-            const apiEndpoint = `/api/user/${username}`;
+            const apiEndpoint = `/user/${username}`;
             return fetch(apiEndpoint);
           })
           .then((response) => {

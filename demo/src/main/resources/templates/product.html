@@ -192,13 +192,29 @@
         fetch("/check-login-status")
           .then((response) => response.json())
           .then((data) => {
+            const loginLink = document.getElementById("login-link");
             if (data.loggedIn) {
-              document.getElementById(
-                "login-link"
-              ).innerHTML = `歡迎 ${data.username}`;
+              loginLink.innerHTML = `歡迎 ${data.username}`;
+              loginLink.href = "/user_info"; // 更改連結到使用者資訊頁面
             }
           });
       });
+      document
+        .getElementById("login-link")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // 防止連結的預設跳轉
+          fetch("/check-login-status")
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.loggedIn) {
+                // 如果用戶已登入，跳轉到使用者資訊頁面
+                window.location.href = "/user-info";
+              } else {
+                // 如果用戶未登入，跳轉到登入頁面
+                window.location.href = "/login";
+              }
+            });
+        });
     </script>
   </head>
   <body>

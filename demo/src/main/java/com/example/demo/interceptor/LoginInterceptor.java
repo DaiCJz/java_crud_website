@@ -1,13 +1,16 @@
 package com.example.demo.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.springframework.web.servlet.HandlerInterceptor;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.model.User;
 
+@Component
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
@@ -27,12 +30,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-        // 請求處理後的邏輯，可以選擇不實現
+        // 可以在此處添加額外的處理邏輯（如果需要）
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        // 完整的請求完成後的邏輯，可以選擇不實現
+        // 請求處理完成後的清理工作（如果需要）
     }
 }

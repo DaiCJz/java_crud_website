@@ -22,7 +22,6 @@
       }
     </style>
   </head>
-
   <body>
     <div class="container">
       <img
@@ -85,7 +84,6 @@
             return;
           }
 
-          // 首先檢查用戶名是否存在
           fetch("/check-username", {
             method: "POST",
             headers: {
@@ -95,8 +93,8 @@
           })
             .then((response) => response.json())
             .then((data) => {
+              console.log("Username check response:", data);
               if (data.exists) {
-                // 用戶名存在，進行登錄
                 return fetch("/login", {
                   method: "POST",
                   headers: {
@@ -112,6 +110,7 @@
               }
             })
             .then((response) => {
+              console.log("Login response status:", response.status);
               if (response.ok) {
                 messageElement.className = "alert alert-success";
                 messageElement.textContent = "登入成功！";
@@ -120,7 +119,10 @@
                   window.location.href = "/product"; // 登入成功後的頁面
                 }, 1000);
               } else {
-                throw new Error("密碼錯誤");
+                return response.text().then((text) => {
+                  console.log("Login response text:", text);
+                  throw new Error(text || "密碼錯誤");
+                });
               }
             })
             .catch((error) => {

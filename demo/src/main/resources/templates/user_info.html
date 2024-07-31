@@ -11,6 +11,14 @@
     <style>
       .container {
         margin-top: 20px;
+        max-width: 400px;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .alert {
+        display: none;
       }
     </style>
   </head>
@@ -31,23 +39,41 @@
     </div>
 
     <script>
-      // 假設這裡的資料是從伺服器或其他來源獲取的
-      const userInfo = {
-        username: "exampleUser",
-        password: "examplePassword",
-        location: "台中",
-        gender: "男",
-        hobbies: ["運動", "旅行"],
-        introduction: "這是自我介紹的範例。",
-      };
-
-      document.getElementById("username").innerText = userInfo.username;
-      document.getElementById("password").innerText = "*****"; // 密碼通常不顯示
-      document.getElementById("location").innerText = userInfo.location;
-      document.getElementById("gender").innerText = userInfo.gender;
-      document.getElementById("hobbies").innerText =
-        userInfo.hobbies.join(", ");
-      document.getElementById("introduction").innerText = userInfo.introduction;
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/session-username")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Unable to fetch username from session");
+            }
+            return response.text(); // 確保返回的是 text()
+          })
+          .then((username) => {
+            console.log("Fetched username:", username); // 用於調試
+            const apiEndpoint = `/api/user/${username}`;
+            return fetch(apiEndpoint);
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error fetching user data");
+            }
+            return response.json();
+          })
+          .then((userInfo) => {
+            document.getElementById("username").innerText = userInfo.username;
+            document.getElementById("password").innerText = "*****"; // 密碼通常不顯示
+            document.getElementById("location").innerText = userInfo.location;
+            document.getElementById("gender").innerText = userInfo.gender;
+            document.getElementById("hobbies").innerText = userInfo.hobbies
+              .split(",")
+              .join(", "); // 根據需要處理 hobbies
+            document.getElementById("introduction").innerText =
+              userInfo.introduction;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("無法獲取使用者資料，請稍後再試！");
+          });
+      });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

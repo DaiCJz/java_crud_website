@@ -1,0 +1,6 @@
+runtime: java11
+entrypoint: java -jar target/demo-0.0.1-SNAPSHOT.jar
+
+handlers:
+- url: /.*
+  script: this field is required, but ignored

@@ -5,18 +5,25 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/demo/add")
     public ResponseEntity<String> addNewUser(
@@ -49,12 +56,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginUser) {
-        User user = userRepository.findByUsername(loginUser.getUsername());
-        if (user != null && user.getPassword().equals(loginUser.getPassword())) {
-            return ResponseEntity.ok().build();
+    public ResponseEntity<String> login(@RequestBody User user, HttpSession session) {
+        User dbUser = userService.findByUsername(user.getUsername());
+        if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
+            session.setAttribute("user", dbUser); // 設置會話
+            return ResponseEntity.ok("Login successful");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
+    }
+
+    @GetMapping("/check-login-status")
+    public ResponseEntity<Map<String, Object>> checkLoginStatus(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        Map<String, Object> response = new HashMap<>();
+        response.put("loggedIn", user != null);
+        response.put("username", user != null ? user.getUsername() : null);
+        return ResponseEntity.ok(response);
     }
 }

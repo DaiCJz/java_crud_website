@@ -187,6 +187,17 @@
           select.addEventListener("change", updateSubtotal);
         });
         updateSubtotal();
+
+        // 檢查是否已登入
+        fetch("/check-login-status")
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.loggedIn) {
+              document.getElementById(
+                "login-link"
+              ).innerHTML = `歡迎 ${data.username}`;
+            }
+          });
       });
     </script>
   </head>
@@ -201,7 +212,7 @@
             <li><a href="/">首頁</a></li>
             <li><a href="/product">商品</a></li>
             <li><a href="/cart">購物車</a></li>
-            <li><a href="/login">登入</a></li>
+            <li><a id="login-link" href="/login">登入</a></li>
           </ul>
         </nav>
       </div>
